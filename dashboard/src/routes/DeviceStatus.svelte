@@ -4,51 +4,20 @@
 
 	let { id, status } = $props();
 
-	let statusColor = $derived(status === CyclerStatus.STATUS_ACTIVE ? 'green' : 'red');
-	let buttonText = $derived(status === CyclerStatus.STATUS_ACTIVE ? 'Stop' : 'Start');
-	let buttonColor = $derived(status === CyclerStatus.STATUS_ACTIVE ? 'red' : 'green');
+	let isActive = $derived(status === CyclerStatus.STATUS_ACTIVE);
 </script>
 
-<div class="device">
-	<span class="status-indicator" style="background-color: {statusColor}"></span>
+<div
+	class="flex items-center rounded-lg border border-gray-600 bg-gray-200 p-4 text-black shadow-md hover:bg-gray-300 {isActive
+		? 'shadow-lime-100'
+		: 'shadow-red-100'}"
+>
+	<span class="mr-2 h-5 w-5 rounded-full {isActive ? 'bg-green-600' : 'bg-red-600'}"></span>
 	<a href="/detail/{id}"><strong>Cycler {id}</strong></a>
-	<button style="background-color: {buttonColor}" onclick={() => switchDeviceStatus(id)}
-		>{buttonText}</button
+	<button
+		class="m-auto rounded-xl border-2 border-gray-600 p-1 {isActive
+			? 'bg-red-600'
+			: 'bg-green-600'} hover:!bg-orange-600"
+		onclick={() => switchDeviceStatus(id)}>{isActive ? 'Stop' : 'Start'}</button
 	>
 </div>
-
-<style>
-	.status-indicator {
-		width: 20px;
-		height: 20px;
-		border-radius: 50%;
-		display: inline-block;
-		margin-right: 0.5rem;
-	}
-	.device {
-		border: 1px solid #ccc;
-		padding: 1rem;
-		border-radius: 6px;
-		background: #ededed;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-		color: #000000;
-		transition: all 0.3s ease-in-out;
-		display: flex;
-		align-items: center;
-	}
-
-	.device:hover {
-		background: #ababab;
-	}
-	button {
-		border: 2px solid #000;
-		border-radius: 8px;
-		opacity: 0.8;
-		padding: 4px;
-		margin: auto;
-	}
-
-	button:hover {
-		background: #5555bb !important;
-	}
-</style>
