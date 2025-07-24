@@ -22,7 +22,7 @@
 
 <div class="m-auto flex w-3/4 items-center justify-end gap-4">
 	<input
-		class="rounded-lg border border-black p-0.5 dark:border-white"
+		class="rounded-lg border border-black p-0.5 placeholder-gray-600 dark:border-white dark:placeholder-gray-300"
 		type="text"
 		placeholder="Cycler"
 		bind:value={searchText}
